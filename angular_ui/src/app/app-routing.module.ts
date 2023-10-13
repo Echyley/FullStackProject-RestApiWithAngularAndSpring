@@ -1,17 +1,16 @@
-import { Component, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
-import { CrudScreenComponent } from './components/crud-screen/crud-screen.component';
+import { RegisterComponent } from './components/register/register.component';
 import { BookShelfComponent } from './components/book-shelf/book-shelf.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'Register', component: CrudScreenComponent },
-  { path: 'BookShelf', component: BookShelfComponent },
+  { path: 'register', component: RegisterComponent }, // Usando o novo nome
+  { path: 'bookShelf', component: BookShelfComponent },
 ];
 
 @NgModule({
-  declarations: [],
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
