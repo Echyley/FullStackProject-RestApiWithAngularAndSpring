@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import Swal from 'sweetalert2';
 import { CrudService } from 'src/app/services/crud.service';
+import { gsap } from 'gsap';
 
 @Component({
   selector: 'app-book-shelf',
@@ -9,54 +10,34 @@ import { CrudService } from 'src/app/services/crud.service';
 })
 export class BookShelfComponent {
   books: any[] = [];
-  bookToUpdate: any = {};
 
-  constructor(private bookService: CrudService) {}
+  public titleList: Array<any> = [];
+
+  constructor(private crudService: CrudService) {}
 
   ngOnInit(): void {
-    this.getBooks();
+    this.getBook(); // Chamada do método getBooks() no componente
   }
 
+  noBooks() {}
+
   //Read
-  getBooks() {
-    this.bookService.findAllBooks().subscribe((books) => {
+  getBook() {
+    this.crudService.getBooks().subscribe((books: any[]) => {
       this.books = books;
     });
   }
 
   //Update
-  selectedBook: any;
-  
-  openEditModal(book: any) {
-    this.selectedBook = { ...book }; // Copy book data to selectedBook
-    $('#editModal').modal('show'); // Show the modal
-  }
-  
-  saveChanges() {
-    // Implement logic to save changes to the server
-    // Call your updateBook method here
-    this.bookService.updateBook(this.selectedBook).subscribe(() => {
-      $('#editModal').modal('hide'); // Hide the modal
-      this.getBooks(); // Refresh the book list
-    });
-  }
-
-  updateBook() {
-    this.bookService.updateBook(this.bookToUpdate).subscribe((updatedBook) => {
-      // Handle the response as needed
-      console.log('Book updated:', updatedBook);
-      // Refresh the book list
-      this.getBooks();
-    });
-  }
+  updateBook(book: any) {}
 
   //Delete
   deleteBook(id: number) {
-    this.bookService.deleteBook(id).subscribe(() => {
+    this.crudService.deleteBook(id).subscribe(() => {
       // Handle the deletion as needed
       console.log('Book deleted');
       // Refresh the book list
-      this.getBooks();
+      this.getBook();
     });
   }
 }

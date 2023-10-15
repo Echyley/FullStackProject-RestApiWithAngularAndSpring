@@ -1,20 +1,47 @@
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-      <div class="owl-carousel slider_carousel">
-        <div class="card_box" *ngFor="let book of books">
-          <img src="" class="card-img-top" alt="..." />
-          <div class="card-body">
-            <h5 class="book-title">{{ book.title }}</h5>
-            <p class="book-genre">{{ book.genre }}</p>
-            <p class="book-genre">{{ book.size }}</p>
-            <button (click)="openEditModal(book)">Edit</button>
-            <button (click)="deleteBook(book.id)">Delete</button>
+<div class="search-bar">
+  <form class="Hotbg">
+    <input type="text" name="" class="Hotbg-txt" formControlName="search" placeholder="Search book" autocomplete="off" />
+    <button class="Hotbg-btn">
+      <img src="../../../assets/img/icons8-pesquisar-50.png" alt="">
+      <a href="#"><i class="fa fa-search"></i></a>
+    </button>
+  </form>
+</div>
+
+<div class="content">
+  <div class="noBooks" *ngIf="books.length === 0">
+    <h1>No books yet :(</h1>
+    <p>Try to register a book!</p>
+  </div>
+
+  <div class="slider-wrapper" *ngIf="books.length > 0">
+    <button data-btn='previos'><</button>
+    <div class="slider">
+
+      <div class="book-card" *ngFor="let book of books">
+        <div class="card-content">
+          <h5 class="book-title">{{ book.title }}</h5>
+          <p class="book-genre">{{ book.genre }}</p>
+          <p class="book-genre">{{ book.size }}</p>
+          <button (click)="updateBook(book)" class="update-button">Update</button>
+          <button (click)="deleteBook(book.id)" class="delete-button">Delete</button>
+          <div *ngIf="book.editing">
+            <h1 [(ngModel)]="book.title"></h1>
+            <input [(ngModel)]="book.genre" placeholder="Genre">
+            <input [(ngModel)]="book.size" placeholder="Size">
+            <button (click)="updateBook(book)" class="save-button">Save</button>
           </div>
         </div>
       </div>
+      
     </div>
+    <button data-btn='next'>></button>
   </div>
+    
+  <ng-template #notFound>
+    <div class="notFoundSearch">
+      Not Found!
+    </div>
+  </ng-template>
+  
 </div>
-
-

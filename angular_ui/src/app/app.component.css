@@ -16,8 +16,11 @@
 }
 
 .nav-item {
+  font-size: 15px;
+  font-weight: 500;
   padding: 0px 150px;
   border-radius: 5px;
+  margin: 10px;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
 
@@ -27,9 +30,8 @@
   }
 }
 
-.nav-item a{
+.nav-item a {
   color: rgba(255, 255, 255, 0.821);
-
 }
 
 .content {

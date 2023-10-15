@@ -13,8 +13,8 @@ export class CrudService {
 
   constructor(private http: HttpClient) {}
 
-  findAllBooks(): Observable<any> {
-    return this.http.get(`${this.backendUrl}/books`);
+  findAllBooks(searchTerm: string): Observable<any> {
+    return this.http.get(`${this.backendUrl}/books?searchTerm=${searchTerm}`);
   }
 
   //Create
@@ -23,14 +23,16 @@ export class CrudService {
   }
 
   //Read
-  findBookById(id: number): Observable<any> {
-    return this.http.get<any>(`${this.backendUrl}/${id}`);
+  getBooks(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.backendUrl}/books`);
   }
 
-  updateBook(book: any): Observable<any> {
-    return this.http.put(`${this.urlUpdate}/${book.id}`, book);
+  //Update
+  updateBakery(product: any): Observable<HttpEvent<any>> {
+    return this.http.put<any>(this.urlUpdate, product);
   }
 
+  //Delete
   deleteBook(id: number): Observable<any> {
     return this.http.delete(`${this.urlDelete}/${id}`);
   }
