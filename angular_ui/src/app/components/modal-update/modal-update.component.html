@@ -1,0 +1,23 @@
+<h1>Edit Book Nº {{ book.id }}</h1>
+
+<form (ngSubmit)="onSubmit()" #bookForm="ngForm">
+  <mat-form-field>
+    <p>Title</p>
+    <input matInput [(ngModel)]="book.title" name="title" placeholder="Title" required>
+  </mat-form-field>
+  
+  <mat-form-field>
+    <p>Genre</p>
+    <input matInput [(ngModel)]="book.genre" name="genre" placeholder="Genre" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <p>Size</p>
+    <input matInput [(ngModel)]="book.size" name="size" placeholder="Size" required>
+  </mat-form-field>
+
+  <div class="modal-actions">
+    <button mat-button type="button" (click)="onCancel()">Cancel</button>
+    <button mat-button type="submit">Save</button>
+  </div>
+</form>

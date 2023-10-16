@@ -23,14 +23,9 @@
           <h5 class="book-title">{{ book.title }}</h5>
           <p class="book-genre">{{ book.genre }}</p>
           <p class="book-genre">{{ book.size }}</p>
-          <button (click)="updateBook(book)" class="update-button">Update</button>
+          <button (click)="openEditModal(book)" class="edit-button">Edit</button>
+          <app-modal-update *ngIf="book.showEditModal"></app-modal-update>
           <button (click)="deleteBook(book.id)" class="delete-button">Delete</button>
-          <div *ngIf="book.editing">
-            <h1 [(ngModel)]="book.title"></h1>
-            <input [(ngModel)]="book.genre" placeholder="Genre">
-            <input [(ngModel)]="book.size" placeholder="Size">
-            <button (click)="updateBook(book)" class="save-button">Save</button>
-          </div>
         </div>
       </div>
       

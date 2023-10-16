@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
 import Swal from 'sweetalert2';
 import { CrudService } from 'src/app/services/crud.service';
-import { gsap } from 'gsap';
+import { ModalUpdateService } from 'src/app/services/modal-update.service';
+import { Book } from 'src/app/interfaces/books-interface';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { ModalUpdateComponent } from '../modal-update/modal-update.component';
 
 @Component({
   selector: 'app-book-shelf',
@@ -10,13 +14,20 @@ import { gsap } from 'gsap';
 })
 export class BookShelfComponent {
   books: any[] = [];
+  selectedBook: Book | null = null;
+  updatedBook: any = {};
 
   public titleList: Array<any> = [];
 
-  constructor(private crudService: CrudService) {}
+  constructor(
+    private router: Router,
+    private dialog: MatDialog,
+    private crudService: CrudService,
+    private modalUpdateService: ModalUpdateService
+  ) {}
 
   ngOnInit(): void {
-    this.getBook(); // Chamada do método getBooks() no componente
+    this.getBook();
   }
 
   noBooks() {}
@@ -29,7 +40,16 @@ export class BookShelfComponent {
   }
 
   //Update
-  updateBook(book: any) {}
+  openEditModal(book: Book) {
+    this.selectedBook = book;
+    const dialogRef = this.dialog.open(ModalUpdateComponent, {
+      data: book,
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+      }
+    });
+  }
 
   //Delete
   deleteBook(id: number) {

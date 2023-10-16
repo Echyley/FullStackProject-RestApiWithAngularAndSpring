@@ -44,7 +44,7 @@ public class BooksService {
         logger.info("Updating a book");
 
         var entity = repository.findById(book.getId())
-            .orElseThrow(() -> new ResourceNotFoundException("No records found for thid id"));
+            .orElseThrow(() -> new ResourceNotFoundException("No records found for this id"));
         entity.setTitle(book.getTitle());
         entity.setGenre(book.getGenre());
         entity.setSize(book.getSize());

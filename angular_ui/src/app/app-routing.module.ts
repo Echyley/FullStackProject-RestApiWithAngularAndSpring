@@ -3,11 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
 import { BookShelfComponent } from './components/book-shelf/book-shelf.component';
+import { ModalUpdateComponent } from './components/modal-update/modal-update.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'register', component: RegisterComponent }, // Usando o novo nome
   { path: 'bookShelf', component: BookShelfComponent },
+  { path: 'update-book/:id', component: ModalUpdateComponent }
 ];
 
 @NgModule({
