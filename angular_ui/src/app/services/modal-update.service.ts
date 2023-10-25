@@ -1,18 +1,28 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
+import { Book } from '../interfaces/books-interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ModalUpdateService {
-  public isModalOpen: boolean = false;
-  private updateUrl = 'http://localhost:8080/librarydb/bookShelf';
+  private backendUrl = 'http://localhost:8080/librarydb';
 
   constructor(private http: HttpClient) {}
 
-  updateBook(updatedBook: any): Observable<any> {
-    const url = `${this.updateUrl}/${updatedBook.id}`;
-    return this.http.put(url, updatedBook);
+  getBookById(id: number): Observable<any> {
+    const url = `${this.backendUrl}/books/${id}`;
+    return this.http.get(url);
+  }
+
+  updateBook(updatedBook: Book): Observable<any> {
+    const url = `${this.backendUrl}/books/${updatedBook.id}`;
+    return this.http.put(url, updatedBook).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Erro na solicitação de atualização:', error);
+        return throwError(error);
+      })
+    );
   }
 }

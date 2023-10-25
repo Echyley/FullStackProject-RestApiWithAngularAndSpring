@@ -1,8 +1,9 @@
-import { Component, Inject, Input } from '@angular/core';
+import { OnInit, Component, Inject, Input } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Book } from 'src/app/interfaces/books-interface';
 import { ModalUpdateService } from 'src/app/services/modal-update.service';
+import { BookShelfComponent } from '../book-shelf/book-shelf.component';
 
 @Component({
   selector: 'app-modal-update',
@@ -11,6 +12,7 @@ import { ModalUpdateService } from 'src/app/services/modal-update.service';
 })
 export class ModalUpdateComponent {
   @Input() book: any;
+  @Input() editedBook: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -22,20 +24,14 @@ export class ModalUpdateComponent {
     this.book = { ...data };
   }
 
-  onSubmit() {
-    if (this.book.title && this.book.genre && this.book.size) {
-      this.modalUpdateService.updateBook(this.book).subscribe(
-        (response) => {
-          this.dialogRef.close(true);
-        },
-        (error) => {
-          console.log('Error while updating the book:', error);
-          this.dialogRef.close();
-        }
-      );
-    } else {
-      console.error('Campos incompletos. Certifique-se de preencher title, genre e size.');
-    }
+  onSave() {
+    // Clone o objeto editedBook para evitar a alteração de dados no objeto original
+    const updatedBook = { ...this.editedBook };
+  
+    // Chame o método de atualização para salvar as alterações
+    this.modalUpdateService.updateBook(updatedBook).subscribe((response) => {
+      // Lida com a resposta do servidor, como fechar o modal ou atualizar a lista de livros.
+    });
   }
 
   onCancel() {

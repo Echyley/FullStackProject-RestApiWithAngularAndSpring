@@ -24,7 +24,7 @@
           <p class="book-genre">{{ book.genre }}</p>
           <p class="book-genre">{{ book.size }}</p>
           <button (click)="openEditModal(book)" class="edit-button">Edit</button>
-          <app-modal-update *ngIf="book.showEditModal"></app-modal-update>
+          <app-modal-update *ngIf="book.showEditModal" [editedBook]="editedBook"></app-modal-update>
           <button (click)="deleteBook(book.id)" class="delete-button">Delete</button>
         </div>
       </div>

@@ -36,7 +36,7 @@ public class BooksService {
     public Books findById(Long id) {
         logger.info("Finding a book!");
         return repository.findById(id)
-        .orElseThrow(() -> new ResourceNotFoundException("No records found for thid id"));
+        .orElseThrow(() -> new ResourceNotFoundException("No records found for this id"));
      }
 
     //Update

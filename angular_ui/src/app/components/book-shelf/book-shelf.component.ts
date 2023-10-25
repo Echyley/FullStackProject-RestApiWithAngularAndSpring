@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import Swal from 'sweetalert2';
 import { CrudService } from 'src/app/services/crud.service';
 import { ModalUpdateService } from 'src/app/services/modal-update.service';
 import { Book } from 'src/app/interfaces/books-interface';
@@ -15,7 +14,7 @@ import { ModalUpdateComponent } from '../modal-update/modal-update.component';
 export class BookShelfComponent {
   books: any[] = [];
   selectedBook: Book | null = null;
-  updatedBook: any = {};
+  editedBook: any = {};
 
   public titleList: Array<any> = [];
 
@@ -30,8 +29,6 @@ export class BookShelfComponent {
     this.getBook();
   }
 
-  noBooks() {}
-
   //Read
   getBook() {
     this.crudService.getBooks().subscribe((books: any[]) => {
@@ -41,6 +38,8 @@ export class BookShelfComponent {
 
   //Update
   openEditModal(book: Book) {
+    console.log('Book selected to update:' + book)
+    this.editedBook = { ...book };
     this.selectedBook = book;
     const dialogRef = this.dialog.open(ModalUpdateComponent, {
       data: book,

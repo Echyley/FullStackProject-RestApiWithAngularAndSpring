@@ -1,23 +1,25 @@
-<h1>Edit Book Nº {{ book.id }}</h1>
+<div class="form-container">
+  <h1>Edit Book</h1>
+  <form #bookForm="ngForm">
+    <div class="form-item">
+      <label for="title">Title</label>
+      <input [(ngModel)]="book.title" type="text" id="title" name="title" placeholder="Title" required autocomplete="off" spellcheck="false">
+    </div>
 
-<form (ngSubmit)="onSubmit()" #bookForm="ngForm">
-  <mat-form-field>
-    <p>Title</p>
-    <input matInput [(ngModel)]="book.title" name="title" placeholder="Title" required>
-  </mat-form-field>
-  
-  <mat-form-field>
-    <p>Genre</p>
-    <input matInput [(ngModel)]="book.genre" name="genre" placeholder="Genre" required>
-  </mat-form-field>
+    <div class="form-item">
+      <label for="genre">Genre</label>
+      <input [(ngModel)]="book.genre" type="text" id="genre" name="genre" placeholder="Genre" required autocomplete="off" spellcheck="false">
+    </div>
 
-  <mat-form-field>
-    <p>Size</p>
-    <input matInput [(ngModel)]="book.size" name="size" placeholder="Size" required>
-  </mat-form-field>
+    <div class="form-item">
+      <label for="size">Size</label>
+      <input [(ngModel)]="book.size" type="text" id="size" name="size" placeholder="Size" required autocomplete="off" spellcheck="false">
+    </div>
+
+  </form>
 
   <div class="modal-actions">
     <button mat-button type="button" (click)="onCancel()">Cancel</button>
-    <button mat-button type="submit">Save</button>
+    <button mat-button type="submit" (click)="onSave()">Save</button>
   </div>
-</form>
+</div>

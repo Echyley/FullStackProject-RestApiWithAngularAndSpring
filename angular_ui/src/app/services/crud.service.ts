@@ -27,10 +27,7 @@ export class CrudService {
     return this.http.get<any[]>(`${this.backendUrl}/books`);
   }
 
-  //Update
-  updateBakery(product: any): Observable<HttpEvent<any>> {
-    return this.http.put<any>(this.urlUpdate, product);
-  }
+  //Update on modal
 
   //Delete
   deleteBook(id: number): Observable<any> {
